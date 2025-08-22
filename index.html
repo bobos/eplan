@@ -495,7 +495,7 @@
     <div class="container">
       <div class="page-header">
         <div class="page-title">
-          <i class="fas fa-bolt"></i> 补能规划v1.9
+          <i class="fas fa-bolt"></i> 补能规划v2.0
         </div>
       </div>
 
@@ -1213,7 +1213,7 @@ ${JSON.stringify(stops.map(({ start, end, consumedTime, consumedBattery }) => { 
 EXAMPLE JSON OUTPUT:
 {
   "reason": "",
-  "rechargingPlan": [
+  "rechargingPlan": [{
     "fromStop": "service stop A",
     "arrivalStop": "arrived service stop B",
     "arrivalTime": "14:00",
@@ -1221,7 +1221,7 @@ EXAMPLE JSON OUTPUT:
     "socBeforeRecharge": 20,
     "socAfterRecharge": 85,
     "rechargeTime": 35,
-    "tags": [{"tag": "having lunch at this service stop", "icon": "fa fa-coffee"}]
+    "tags": [{"tag": "having lunch at this service stop", "icon": "fa fa-coffee"}]}
   ] 
 }
 JSON field explanation:

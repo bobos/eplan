@@ -495,7 +495,7 @@
     <div class="container">
       <div class="page-header">
         <div class="page-title">
-          <i class="fas fa-bolt"></i> 补能规划v2.0
+          <i class="fas fa-bolt"></i> 补能规划v2.1
         </div>
       </div>
 
@@ -800,7 +800,8 @@
       glmfree: 'z-ai/glm-4.5-air:free',
       gemini: 'google/gemini-2.5-flash',
     };
-    const openrouterHost = 'https://openrouter.ai/api/v1/chat/completions';
+    const openrouterHost = 'https://api.deepseek.com/chat/completions';
+      //'https://openrouter.ai/api/v1/chat/completions';
     const tools = [{
       type: 'function',
       function: {

@@ -1453,6 +1453,7 @@ tags: The tags that matching current service stop`;
       }
       await collectService(city, pageNum + 1, allService.concat(ret));
     }
+    const phony = 'phony';
     const GuangZhouServiceStops = {
       '南沙区': [
         { name: '潭洲服务区(东新高速东沙方向)', location: '113.401198,22.759078', altitude: 8 },
@@ -1498,6 +1499,8 @@ tags: The tags that matching current service stop`;
         { name: '河洞服务区(从莞深高速东莞方向)', location: '113.808374,23.438718', altitude: 24 },
       ],
       '花都区': [
+        {name: '花城服务区(乐广高速广州方向)', location: '113.313125,23.503162', altitude: 67},
+        {name: `花城服务区(${phony})`, location: '113.315469,23.503416', altitude: 67},
         { name: '炭步服务区(沈海高速海口方向)', location: '113.068275,23.314411', altitude: 10 },
         { name: '炭步服务区(沈海高速沈阳方向)', location: '113.067509,23.311997', altitude: 10 },
       ],
@@ -1521,6 +1524,8 @@ tags: The tags that matching current service stop`;
         { name: '广氮服务区(沈海高速广州支线海口方向)', location: '113.384020,23.151452', altitude: 15 },
       ],
       '海珠区': [
+        { name: '华南快速服务区(A)', location: '113.345109,23.060947', altitude: 11 },
+        { name: '华南快速服务区(B)', location: '113.344256,23.062097', altitude: 11 },
         { name: '华洲加油站(A)', location: '113.338871,23.064378', altitude: 9 },
         { name: '华洲加油站(B)', location: '113.345249,23.060799', altitude: 9 },
       ]
@@ -1535,6 +1540,8 @@ tags: The tags that matching current service stop`;
         { name: '范湖服务区(佛清从高速佛山方向)', location: '113.025242,23.338511', altitude: 7 },
       ],
       "南海区": [
+        {name: '沙涌加油站(广佛高速广州方向)', location: '113.163602,23.137643', altitude: 6},
+        {name: `沙涌加油站(${phony})`, location: '113.163335,23.138963', altitude: 6},
         { name: '丹灶服务区(沈海高速沈阳方向)', location: '112.900160,23.043781', altitude: 15 },
         { name: '丹灶服务区(沈海高速海口方向)', location: '112.898841,23.044525', altitude: 15 },
         { name: '狮山加油站(广三高速三水方向)', location: '112.996636,23.139294', altitude: 9 },
@@ -2696,14 +2703,14 @@ tags: The tags that matching current service stop`;
       ],
       宝安区: [
         {name: '福永停车区(京港澳高速北京方向)', location: '113.847318,22.694563', altitude: 26},
-        {name: '福永停车区(phony)', location: '113.846085,22.695622', altitude: 26},
+        {name: `福永停车区(${phony})`, location: '113.846085,22.695622', altitude: 26},
         {name: '新桥停车区(京港澳高速深圳方向)', location: '113.849665,22.734730', altitude: 14},
-        {name: '新桥停车区(phony)', location: '113.851180,22.735087', altitude: 14},
+        {name: `新桥停车区(${phony})`, location: '113.851180,22.735087', altitude: 14},
       ],
       福田区: 
       [
         {name: '福田无名服务区(京港澳高速北京方向)', location: '114.061030,22.512811', altitude: 12},
-        {name: '福田无名服务区(phony)', location: '114.061433,22.512216', altitude: 12},
+        {name: `福田无名服务区(${phony})`, location: '114.061433,22.512216', altitude: 12},
       ],
       罗湖区: [
         {name: '荣达加油站(武深高速武汉方向)', location: '114.191577,22.610701', altitude: 96},
@@ -2711,7 +2718,7 @@ tags: The tags that matching current service stop`;
       ],
       龙华区: [
         {name: '龙华沈海高速加油站(沈海高速海口方向)', location: '113.997124,22.688610', altitude: 88},
-        {name: '龙华沈海高速加油站(phony)', location: '114.002518,22.687984', altitude: 88},
+        {name: `龙华沈海高速加油站(${phony})`, location: '114.002518,22.687984', altitude: 88},
         {name: '龙华珠三角环线高速服务区(珠三角环线高速广州方向)', location: '114.037586,22.765680', altitude: 28},
         {name: '龙华珠三角环线高速服务区(珠三角环线高速澳门方向)', location: '114.036881,22.766297', altitude: 28},
       ],

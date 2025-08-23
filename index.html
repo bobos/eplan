@@ -486,6 +486,10 @@
         border-radius: 14px;
       }
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 
@@ -501,33 +505,64 @@
 
       <div class="card">
         <div class="card-title">
+          <i class="fas fa-code"></i> 车辆设定
+        </div>
+
+        <div class="switch-container">
+          <h4>展开</h4>
+          <label class="custom-switch">
+            <input type="checkbox" id="carSetting" checked="true">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+          <div id="settings" class="input-group">
+            <label class="input-label">电池容量(度)</label>
+            <input type="text" class="input-control" id="maxBattery" value="61">
+            <label class="input-label">满载重量(吨)</label>
+            <input type="text" class="input-control" id="maxWeight" value="2.1">
+            <label class="input-label">CLTC官标续航(km)</label>
+            <input type="text" class="input-control" id="cltc" value="550">
+            <label class="input-label">高速续航打折</label>
+            <input type="text" class="input-control" id="freewayFactor" value="6.5">
+            <label class="input-label">低速续航打折</label>
+            <input type="text" class="input-control" id="normalFactor" value="8">
+            <label class="input-label">平均充电功率(度/小时)</label>
+            <input type="text" class="input-control" id="chargeSpeed" value="65">
+          </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
           <i class="fas fa-route"></i> 行程路线
         </div>
 
         <div class="switch-container">
           <h4>AI规划</h4>
           <label class="custom-switch">
-            <input type="checkbox" id="enableAi">
+            <input type="checkbox" id="enableAi" checked="true">
             <span class="slider"></span>
           </label>
         </div>
 
-        <div class="input-group">
-          <label class="input-label">model</label>
-          <input type="text" class="input-control" id="model" placeholder="deepseekr1,o4mini,glm,gemini" value="o4mini">
-        </div>
+        <div id="aiSetting">
+          <div class="input-group">
+            <label class="input-label">model</label>
+            <input type="text" class="input-control" id="model" placeholder="deepseekr1,o4mini,glm,gemini" value="o4mini">
+          </div>
 
-        <div class="input-group">
-          <label class="input-label">key</label>
-          <input type="text" class="input-control" id="apikey" placeholder="输入openrouter API key">
-        </div>
+          <div class="input-group">
+            <label class="input-label">key</label>
+            <input type="text" class="input-control" id="apikey" placeholder="输入openrouter API key">
+          </div>
 
-        <div class="switch-container">
-          <h4>response format support</h4>
-          <label class="custom-switch">
-            <input type="checkbox" id="responseFormat">
-            <span class="slider"></span>
-          </label>
+          <div class="switch-container">
+            <h4>response format support</h4>
+            <label class="custom-switch">
+              <input type="checkbox" id="responseFormat">
+              <span class="slider"></span>
+            </label>
+          </div>
         </div>
 
         <div class="input-group">
@@ -570,24 +605,25 @@
           <label class="input-label">路线</label>
           <input type="text" class="input-control" id="routeNo" value="1">
         </div>
-        <!--
-<div class="switch-container">
-  <h4>保守策略</h4>
-  <label class="custom-switch">
-    <input type="checkbox" id="strategy">
-    <span class="slider"></span>
-  </label>
-</div>
-                -->
-      </div>
 
-      <div class="card">
-        <div class="card-title">
-          <i class="fas fa-user-cog"></i>个人需求
+        <div id="advanceSetting">
+          <div class="switch-container">
+            <h4>保守策略</h4>
+            <label class="custom-switch">
+              <input type="checkbox" id="strategy">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <i class="fas fa-user-cog"></i>个人需求
+            </div>
+
+            <textarea class="input-control" id='freeRequirement' placeholder="输入您的特别要求，如：优先使用国家电网，避开拥挤充电站..."
+              rows="3">抵达终点时电量控制在18%左右</textarea>
+          </div>
         </div>
-
-        <textarea class="input-control" id='freeRequirement' placeholder="输入您的特别要求，如：优先使用国家电网，避开拥挤充电站..."
-          rows="3">抵达终点时电量控制在18%左右</textarea>
       </div>
 
       <button id="plan-button" class="btn btn-primary">
@@ -657,13 +693,13 @@
   <script>
     "use strict";
     let routeNo = 0;
-    const KwhPer120PerKm = 17 * 0.01; //65%
-    const KwhPer80PerKm = 14 * 0.01; //80%
-    const Weight = 2.1;
-    const chargeEffe = 0.92;
-    const chargeSpeed = 65;
+    let KwhPer120PerKm;
+    let KwhPer80PerKm;
+    let Weight;
+    let chargeSpeed;
+    let maxBattery;
+
     const J2KwhFactor = 3.6e6;
-    const maxBattery = 61;
     const hardMinSoc = 5;
     let socStart = 100;
     function print(line) {
@@ -886,8 +922,8 @@
     }
     var Preset;
     (function (Preset) {
-      Preset["conservative"] = "**conservative**:make sure there is always a backup service stop to recharge in case driver arrives at the planned service stop and finds out it is out of service, make sure soc is above 5% when car arrives the backup service stop.**tag**:None";
-      Preset["aggressive"] = "**aggressive**:make sure car arrives at planned service stop with soc above minimal allowed soc.**tag**:注意预留百分之几的虚电";
+      Preset["conservative"] = `[conservative]:always make sure the next service stop(the backup recharging stop) is reachable and soc will be above ${hardMinSoc}% when arrival at the backup service stop in case currently planned recharging service stop is out of service.`;
+      Preset["aggressive"] = "[aggressive]:make sure car arrives at planned service stop with soc above minimal allowed soc.";
     })(Preset || (Preset = {}));
     function toMinutes(time) {
       let [hour, min] = time.split(':');
@@ -1114,7 +1150,13 @@
 - Reduce the recharging times as less as possible to save overall trip time
 
 **route data structure info**:
-- the route provided to you consists of a list of steps, each step follows below JSON format: {start: <name of the start service stop>, end: <name of the end service stop>, consumedTime: <driving time from start to end in mins>, consumedBattery: <battery to be consumed from start to end in Kwh>}
+- the route provided to you consists of a list of steps, each step follows below JSON format:
+  {
+    start: <name of the start service stop>,
+    end: <name of the end service stop>,
+    consumedTime: <driving time from start to end in mins>,
+    consumedBattery: <battery to be consumed from start to end in Kwh>
+  }
 - car can be recharged at any of these service stops
 **here is the actual route data**:
 ${JSON.stringify(stops.map(({ start, end, consumedTime, consumedBattery }) => { return { start, end, consumedTime, consumedBattery }; }))}
@@ -1124,10 +1166,8 @@ ${JSON.stringify(stops.map(({ start, end, consumedTime, consumedBattery }) => { 
 - summarize each driver requirement with a tag, each tag should be in Chinese and shoud not exceed 12 words 
 - find a suitable "fontawesome" icon for each tag, for example, icon "fa fa-coffee" can be used for tag "have a break"
 - the tag should be attached to the service stops which matching the requirement in the response
-- driver requirements are following: ${otherRequirement}
-  `;
-      //- generate the recharging plan by strictly follow below format:
-      //[{fromStop: <>, arrivalStop: <current recharging service stop>, arrivalTime: <arrival time>, departureTime: <departure time>, chargeDetail: <planned recharging details>, tags:[<tags matching current service stop>]}]
+- recharging strategy: ${presets}
+- driver requirements are following: ${otherRequirement}`;
       const response_format = {
         type: 'json_schema',
         json_schema: {
@@ -1181,6 +1221,10 @@ ${JSON.stringify(stops.map(({ start, end, consumedTime, consumedBattery }) => { 
                       description: 'Estimated time to complete recharging in minutes',
                       minimum: 1
                     },
+                    backupStop: {
+                      type: 'string',
+                      description: 'The next service stop name as backup service stop for conservative recharging strategy, if recharging strategy is aggressive, this field should be left as emtpy'
+                    },
                     tags: {
                       type: 'array',
                       description: 'The tags that matching current service stop',
@@ -1202,7 +1246,7 @@ ${JSON.stringify(stops.map(({ start, end, consumedTime, consumedBattery }) => { 
                       }
                     }
                   },
-                  required: ['fromStop', 'arrivalStop', 'arrivalTime', 'departureTime', 'socBeforeRecharge', 'socAfterRecharge', 'rechargeTime', 'tags'],
+                  required: ['fromStop', 'arrivalStop', 'backupStop', 'arrivalTime', 'departureTime', 'socBeforeRecharge', 'socAfterRecharge', 'rechargeTime', 'tags'],
                   additionalProperties: false
                 }
               }
@@ -1215,19 +1259,32 @@ EXAMPLE JSON OUTPUT:
 {
   "reason": "",
   "rechargingPlan": [{
-    "fromStop": "service stop A",
-    "arrivalStop": "arrived service stop B",
+    "fromStop": "home",
+    "arrivalStop": "serviceStop B",
+    "backupStop": "",
     "arrivalTime": "14:00",
     "departureTime": "14:30",
-    "socBeforeRecharge": 20,
+    "socBeforeRecharge": 30,
     "socAfterRecharge": 85,
-    "rechargeTime": 35,
-    "tags": [{"tag": "having lunch at this service stop", "icon": "fa fa-coffee"}]}
-  ] 
+    "rechargeTime": 30,
+    "tags": [{"tag": "having lunch at this service stop", "icon": "fa fa-coffee"}]},
+    {
+      "fromStop": "serviceStop B",
+      "arrivalStop": "serviceStop H",
+      "backupStop": "",
+      "arrivalTime": "18:00",
+      "departureTime": "18:33",
+      "socBeforeRecharge": 30,
+      "socAfterRecharge": 80,
+      "rechargeTime": 33,
+      "tags": [{"tag": "having dinner at this service stop", "icon": "fa fa-coffee"}]}
+  ]
 }
+
 JSON field explanation:
 fromStop: Journey start point or previous recharging service stop name.
 arrivalStop: Current planned recharging service stop name.
+backupStop: The next service stop name as backup recharging stop for conservative recharging strategy, if recharging strategy is aggressive, this field should be left as emtpy.
 arrivalTime: The estimated time of arriving arrivalStop, format as: HH:MM, HH is from 00 to 23.
 departureTime: The estimated time of departing arrivalStop, format as: HH:MM, HH is from 00 to 23.
 socBeforeRecharge: The percentage of soc before recharging,  from 1 to 99, means 1% - 99%.
@@ -2625,6 +2682,29 @@ tags: The tags that matching current service stop`;
       const planButton = document.getElementById('plan-button');
       const loadButton = document.getElementById('load-button');
       const backButton = document.getElementById('back-button');
+      const aiEnabler = document.getElementById('enableAi');
+      const carSetting = document.getElementById('carSetting');
+
+      carSetting.addEventListener('change', () => {
+        const div = document.getElementById('settings');
+        if (carSetting.checked) {
+          div.classList.remove('hidden');
+        } else {
+          div.classList.toggle('hidden');
+        }
+      });
+
+      aiEnabler.addEventListener('change', () => {
+        const div = document.getElementById('aiSetting');
+        const div1 = document.getElementById('advanceSetting');
+        if (aiEnabler.checked) {
+          div.classList.remove('hidden');
+          div1.classList.remove('hidden');
+        } else {
+          div.classList.toggle('hidden');
+          div1.classList.toggle('hidden');
+        }
+      });
 
       loadButton.addEventListener('click', async function () {
         const data = loadDataFromLocalStorage();
@@ -2648,7 +2728,17 @@ tags: The tags that matching current service stop`;
 
       // 点击规划按钮切换到路线页面
       planButton.addEventListener('click', async function () {
+        const cltc = document.getElementById('cltc').value.trim();
+        maxBattery = document.getElementById('maxBattery').value.trim();
+        const cltcKwhPerKm = maxBattery / cltc;
+        KwhPer120PerKm = (cltcKwhPerKm / (document.getElementById('freewayFactor').value.trim() * 0.1)).toFixed(4);
+        KwhPer80PerKm = (cltcKwhPerKm / (document.getElementById('normalFactor').value.trim() *0.1)).toFixed(4);
+        Weight = document.getElementById('maxWeight').value.trim();
+        chargeSpeed = document.getElementById('chargeSpeed').value.trim();
         routeNo = document.getElementById('routeNo').value.trim();
+
+        print(`高速百公里电耗:${KwhPer120PerKm * 100}kwh, 低速百公里电耗:${KwhPer80PerKm * 100}kwh`);
+
         const startPoint = document.getElementById('startPoint').value.trim();
         const endPoint = document.getElementById('stopPoint').value.trim();
         const model = document.getElementById('model').value.trim();
@@ -2663,8 +2753,7 @@ tags: The tags that matching current service stop`;
           return;
         }
         let cacheData = { startPoint, endPoint, startTime };
-        //const conservative = document.getElementById('strategy').checked;
-        const conservative = false;
+        const conservative = document.getElementById('strategy').checked;
         const requirements = document.getElementById('freeRequirement').value.trim();
         const supportResponseFormat = document.getElementById('responseFormat').checked;
         const aiEnabled = document.getElementById('enableAi').checked;
@@ -2672,7 +2761,7 @@ tags: The tags that matching current service stop`;
         inputPage.classList.remove('active');
         loadingPage.classList.add('active');
         try {
-          const aiPlan = await generateRoute(key, model, supportResponseFormat, startPoint, endPoint, startTime, startSoc, maxSoc, minSoc, [conservative ? Preset.conservative : Preset.aggressive], requirements, aiEnabled);
+          const aiPlan = await generateRoute(key, model, supportResponseFormat, startPoint, endPoint, startTime, startSoc, maxSoc, minSoc, conservative ? Preset.conservative : Preset.aggressive, requirements, aiEnabled);
           if (aiPlan.length > 0) {
             cacheData.aiPlan = aiPlan;
             cacheData.totalDistance = totalDistance;

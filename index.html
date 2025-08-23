@@ -1454,6 +1454,16 @@ tags: The tags that matching current service stop`;
       await collectService(city, pageNum + 1, allService.concat(ret));
     }
     const phony = 'phony';
+    const GuangZhouServiceStopsInBuild = {
+      从化区: [
+        {name: '瓦窑岗服务区(京港澳高速深圳方向)(建设中)', location: '113.462168,23.612678', altitude: 41}, 
+        {name: '瓦窑岗服务区(京港澳高速北京方向)(建设中)', location: '113.463673,23.613520', altitude: 41},
+      ],
+      增城区: [
+        {name: '朱村服务区(增天高速增城方向)(建设中)', location: '113.713065,23.238229', altitude: 'x'},
+      ],
+    }
+
     const GuangZhouServiceStops = {
       '南沙区': [
         { name: '潭洲服务区(东新高速东沙方向)', location: '113.401198,22.759078', altitude: 8 },
@@ -1744,6 +1754,9 @@ tags: The tags that matching current service stop`;
         { name: '恭城服务区(呼北高速北海方向)', location: '110.815611,24.886585', altitude: 166 },
         { name: '栗木停车区(呼北高速呼和浩特方向)', location: '110.900364,25.090461', altitude: 188 },
         { name: '栗木停车区(呼北高速北海方向)', location: '110.899529,25.091316', altitude: 188 },
+      ],
+      龙胜各族自治县: [
+        {name: '龙胜服务区(包茂高速茂名方向)', location: '109.946363,25.787543', altitude: 242},
       ]
     };
     const LiuZhouServiceStops = {

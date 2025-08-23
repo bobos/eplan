@@ -538,7 +538,7 @@
         </div>
 
         <div class="switch-container">
-          <h4>AI规划</h4>
+          <h4>DeepSeek AI智能规划</h4>
           <label class="custom-switch">
             <input type="checkbox" id="enableAi" checked="true">
             <span class="slider"></span>
@@ -546,16 +546,19 @@
         </div>
 
         <div id="aiSetting">
+          <!--
           <div class="input-group">
             <label class="input-label">model</label>
-            <input type="text" class="input-control" id="model" placeholder="deepseekr1,o4mini,glm,gemini" value="o4mini">
+            <input type="text" class="input-control" id="model" placeholder="deepseekr1,o4mini,glm,gemini" value="deepseek-reasoner">
           </div>
+          -->
 
           <div class="input-group">
-            <label class="input-label">key</label>
-            <input type="text" class="input-control" id="apikey" placeholder="输入openrouter API key">
+            <label class="input-label">API Key</label>
+            <input type="text" class="input-control" id="apikey" placeholder="输入deepseek API key">
           </div>
 
+          <!--
           <div class="switch-container">
             <h4>response format support</h4>
             <label class="custom-switch">
@@ -563,11 +566,12 @@
               <span class="slider"></span>
             </label>
           </div>
+          -->
         </div>
 
         <div class="input-group">
           <label class="input-label">出发地点</label>
-          <input type="text" class="input-control" id="startPoint" placeholder="输入起点位置" value="广州市黄埔区中新知识城招商雍景湾">
+          <input type="text" class="input-control" id="startPoint" placeholder="输入起点位置" value="当前位置">
         </div>
 
         <div class="input-group">
@@ -602,7 +606,7 @@
         </div>
 
         <div class="input-group">
-          <label class="input-label">路线</label>
+          <label class="input-label">高德地图路线选择</label>
           <input type="text" class="input-control" id="routeNo" value="1">
         </div>
 
@@ -627,7 +631,7 @@
       </div>
 
       <button id="plan-button" class="btn btn-primary">
-        <i class="fas fa-brain"></i> AI智能补能规划
+        <i class="fas fa-brain"></i> 补能规划
       </button>
 
       <button id="load-button" class="btn btn-secondary">
@@ -637,7 +641,7 @@
       <div style="flex: 1;"></div>
 
       <div style="text-align: center; padding: 16px 0; color: var(--text-light);">
-        使用AI智能规划最优补能方案
+        使用AI智能规划时用时较长,请耐心等待
       </div>
     </div>
   </div>
@@ -698,6 +702,7 @@
     let Weight;
     let chargeSpeed;
     let maxBattery;
+    let currentLoc = '';
 
     const J2KwhFactor = 3.6e6;
     const hardMinSoc = 5;
@@ -731,7 +736,7 @@
         apiKey = key;
       }
 
-      const { stops, totalConsumption, totalDistance } = await collectStops({ location: await convLocation(startAddress), name: startAddress }, { location: await convLocation(destAddres), name: destAddres });
+      const { stops, totalConsumption, totalDistance } = await collectStops({ location: startAddress === '当前位置' ? currentLoc: await convLocation(startAddress), name: startAddress }, { location: await convLocation(destAddres), name: destAddres });
       if (maxBattery * (1 - minSoc) >= totalConsumption) {
         alert(`enough soc left ${Math.floor((maxBattery - totalConsumption) / maxBattery * 100)}%, total ${totalDistance} km, no need to plan charging`);
         return [];
@@ -2741,7 +2746,8 @@ tags: The tags that matching current service stop`;
 
         const startPoint = document.getElementById('startPoint').value.trim();
         const endPoint = document.getElementById('stopPoint').value.trim();
-        const model = document.getElementById('model').value.trim();
+        //const model = document.getElementById('model').value.trim();
+        const model = 'deepseek-reasoner';
         const key = document.getElementById('apikey').value.trim();
         const startTime = document.getElementById('startTime').value.trim();
         const startSoc = parseInt(document.getElementById('startSoc').value.trim());
@@ -2755,7 +2761,8 @@ tags: The tags that matching current service stop`;
         let cacheData = { startPoint, endPoint, startTime };
         const conservative = document.getElementById('strategy').checked;
         const requirements = document.getElementById('freeRequirement').value.trim();
-        const supportResponseFormat = document.getElementById('responseFormat').checked;
+        //const supportResponseFormat = document.getElementById('responseFormat').checked;
+        const supportResponseFormat = false;
         const aiEnabled = document.getElementById('enableAi').checked;
 
         inputPage.classList.remove('active');
@@ -2823,6 +2830,21 @@ tags: The tags that matching current service stop`;
       }
       return undefined;
     }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => { // 成功回调
+        const { latitude, longitude } = position.coords;
+        currentLoc = `${longitude},${latitude}`;
+      },
+      (error) => { // 失败回调
+        alert("定位失败");
+      },
+      { 
+        enableHighAccuracy: false, // 高精度模式
+        timeout: 10000,           // 超时10秒
+        maximumAge: 60000         // 缓存有效期
+      }
+    );
   </script>
 </body>
 

@@ -756,7 +756,7 @@
         if (!step.cost.toll_road || distance < 500)
           continue;
         const polylines = step.polyline.split(';').splice(1);
-        const incre = Math.floor(polylines.length / Math.floor(distance / 800)); // scan at every 800M 
+        const incre = Math.floor(polylines.length / Math.floor(distance / 600)); // scan at every 600M 
         for (let index = 0; index < polylines.length; index += incre) {
           const ret = await getNearestStop(polylines[index], step.cities, prevStation, endStation.location);
           if (ret !== undefined && ret.name !== prevStation.name) {
@@ -878,7 +878,7 @@
           if (!sa)
             continue;
           for (const s of sa) {
-            if (calculateDistance(location, s.location) <= 500) { //小于500米
+            if (calculateDistance(location, s.location) <= 400) { //小于400米
               found = s;
             }
           }
@@ -902,10 +902,10 @@
             }
           }
           if (!findAnother) {
-            const maxSteps2Check = pathInfo.steps.length > 10 ? 10 : pathInfo.steps.length;
+            const maxSteps2Check = pathInfo.steps.length > 30 ? 30 : pathInfo.steps.length;
             for (let i = 0; i<maxSteps2Check; i++) {
               const polylines = pathInfo.steps[i].polyline.split(';');
-              if (calculateDistance(polylines[polylines.length - 1], destLoc) - distanceToDest > 1000) {
+              if (calculateDistance(polylines[polylines.length - 1], destLoc) - distanceToDest > 500) {
                 // wrong side of service stop, bail out
                 return;
               }
@@ -1503,12 +1503,12 @@ tags: The tags that matching current service stop`;
         { name: '南香山服务区(花莞高速花都方向)', location: '113.643626,23.225485', altitude: 17 },
         { name: '沙埔服务区(济广高速济南方向)', location: '113.675231,23.187070', altitude: 22 },
         { name: '沙埔服务区(济广高速广州方向)', location: '113.676422,23.189259', altitude: 22 },
-        { name: '荔城服务区(珠三角环线高速外环方向)', location: '113.780255,23.240705', altitude: 19 },
-        { name: '荔城服务区(珠三角环线高速内环方向)', location: '113.778932,23.240016', altitude: 19 },
-        { name: '新安服务区(珠三角环线高速深圳方向)', location: '113.573162,23.378711', altitude: 92 },
-        { name: '新安服务区(珠三角环线高速非深圳方向)', location: '113.578309,23.378393', altitude: 92 },
-        { name: '仙村服务区(A)', location: '113.693023,23.161318', altitude: 5 },
-        { name: '仙村服务区(B)', location: '113.697785,23.159380', altitude: 5 },
+        { name: '荔城服务区(A)', location: '113.784030,23.237683', altitude: 19 },
+        { name: '荔城服务区(B)', location: '113.785365,23.238273', altitude: 19 },
+        { name: '新安服务区(A)', location: '113.579020,23.378156', altitude: 104 },
+        { name: '新安服务区(B)', location: '113.578462,23.376979', altitude: 104 },
+        { name: '仙村服务区(A)', location: '113.698241,23.158706', altitude: 5 },
+        { name: '仙村服务区(B)', location: '113.697959,23.159397', altitude: 5 },
         { name: '河洞服务区(从莞深高速从化方向)', location: '113.808866,23.440458', altitude: 24 },
         { name: '河洞服务区(从莞深高速东莞方向)', location: '113.808374,23.438718', altitude: 24 },
       ],
@@ -1526,12 +1526,12 @@ tags: The tags that matching current service stop`;
       '黄埔区': [
         { name: '中新服务区(广河高速河源方向)', location: '113.602678,23.310739', altitude: 13 },
         { name: '中新服务区(广河高速广州方向)', location: '113.602138,23.312123', altitude: 13 },
-        { name: '火村服务区(A)', location: '113.485659,23.155489', altitude: 23 },
-        { name: '火村服务区(B)', location: '113.484471,23.156617', altitude: 23 },
+        { name: '火村服务区(A)', location: '113.489941,23.154107', altitude: 23 },
+        { name: '火村服务区(B)', location: '113.491094,23.152736', altitude: 23 },
         { name: '和龙服务区(京港澳高速北京方向)', location: '113.476931,23.219530', altitude: 68 },
       ],
       '天河区': [
-        { name: '黄村服务区(广州环城高速内环方向)', location: '113.397623,23.147122', altitude: 9 },
+        { name: '黄村服务区(广州环城高速内环方向)', location: '113.403012,23.144607', altitude: 9 },
         { name: '黄村服务区(广州环城高速外环方向)', location: '113.403912,23.145049', altitude: 9 },
         { name: '广氮服务区(沈海高速广州支线沈阳方向)', location: '113.383248,23.150448', altitude: 15 },
         { name: '广氮服务区(沈海高速广州支线海口方向)', location: '113.384020,23.151452', altitude: 15 },
@@ -1539,7 +1539,7 @@ tags: The tags that matching current service stop`;
       '海珠区': [
         { name: '华南快速服务区(A)', location: '113.345109,23.060947', altitude: 11 },
         { name: '华南快速服务区(B)', location: '113.344256,23.062097', altitude: 11 },
-        { name: '华洲加油站(A)', location: '113.338871,23.064378', altitude: 9 },
+        { name: '华洲加油站(A)', location: '113.344309,23.061858', altitude: 9 },
         { name: '华洲加油站(B)', location: '113.345249,23.060799', altitude: 9 },
       ]
     };
@@ -1547,8 +1547,8 @@ tags: The tags that matching current service stop`;
       "三水区": [
         { name: '三水服务区(广佛肇高速广州方向)', location: '112.896063,23.244388', altitude: 15 },
         { name: '三水服务区(广佛肇高速肇庆方向)', location: '112.897686,23.245972', altitude: 15 },
-        { name: '大塘服务区(珠三角环线高速内环方向)', location: '112.975045,23.432146', altitude: 11 },
-        { name: '大塘服务区(珠三角环线高速肇庆方向)', location: '112.973690,23.433296', altitude: 11 },
+        { name: '大塘服务区(A)', location: '112.979123,23.430702', altitude: 11 },
+        { name: '大塘服务区(B)', location: '112.979980,23.429444', altitude: 11 },
         { name: '范湖服务区(佛清从高速从化方向)', location: '113.027106,23.338264', altitude: 7 },
         { name: '范湖服务区(佛清从高速佛山方向)', location: '113.025242,23.338511', altitude: 7 },
       ],
@@ -1560,8 +1560,8 @@ tags: The tags that matching current service stop`;
         { name: '狮山加油站(广三高速广州方向)', location: '112.995906,23.138756', altitude: 9 },
       ],
       "高明区": [
-        { name: '明城停车区(珠三角环线高速珠海方向)', location: '112.691962,22.947305', altitude: 32 },
-        { name: '明城停车区(珠三角环线高速内环方向)', location: '112.690696,22.949309', altitude: 32 },
+        { name: '明城停车区(A)', location: '112.696945,22.944592', altitude: 32 },
+        { name: '明城停车区(B)', location: '112.695801,22.946500', altitude: 32 },
         { name: '更合停车区(广台高速台山方向)', location: '112.499981,22.757366', altitude: 43 },
         { name: '更合停车区(广台高速广州方向)', location: '112.499487,22.755973', altitude: 43 },
         { name: '松岗服务区(莞佛高速佛山方向)', location: '112.824118,22.950590', altitude: 14 },
@@ -1574,8 +1574,8 @@ tags: The tags that matching current service stop`;
         { name: '冲鹤服务区(广佛江珠高速广州方向)', location: '113.198885,22.781098', altitude: 13 },
       ],
       "禅城区": [
-        { name: '罗格服务区(A方向)', location: '113.007140,22.994094', altitude: 11 },
-        { name: '罗格服务区(B方向)', location: '113.011853,22.990689', altitude: 11 },
+        { name: '罗格服务区(A方向)', location: '113.012533,22.991400', altitude: 11 },
+        { name: '罗格服务区(B方向)', location: '113.012239,22.990577', altitude: 11 },
       ]
     };
     const ZhaoQingServiceStops = {
@@ -1586,8 +1586,8 @@ tags: The tags that matching current service stop`;
       "鼎湖区": [
         { name: '鼎湖山服务区(广佛肇高速广州方向)', location: '112.629117,23.245658', altitude: 24 },
         { name: '鼎湖山服务区(广佛肇高速肇庆方向)', location: '112.627663,23.247110', altitude: 24 },
-        { name: '鼎湖服务区(珠三角环线9247高速四会方向)', location: '112.690704,23.217964', altitude: 9 },
-        { name: '鼎湖服务区(珠三角环线高速外环方向)', location: '112.689625,23.21', altitude: 9 },
+        { name: '鼎湖服务区(A)', location: '112.696000,23.215737', altitude: 9 },
+        { name: '鼎湖服务区(B)', location: '112.695161,23.216544', altitude: 9 },
       ],
       "封开县": [
         { name: '金装服务区(怀郁高速郁南方向)', location: '111.874010,23.775097', altitude: 74 },
@@ -1718,8 +1718,8 @@ tags: The tags that matching current service stop`;
         { name: '黄关服务区(呼北高速北海方向)', location: '110.995157,25.314831', altitude: 315 },
       ],
       "七星区": [
-        { name: '尧山服务区(桂林绕城高速内环方向)', location: '110.351410,25.268096', altitude: 142 },
-        { name: '尧山服务区(桂林绕城高速外环方向)', location: '110.351102,25.271018', altitude: 142 },
+        { name: '尧山服务区(桂林绕城高速内环方向)', location: '110.356125,25.265508', altitude: 142 },
+        { name: '尧山服务区(桂林绕城高速外环方向)', location: '110.355822,25.268424', altitude: 142 },
       ],
       "兴安县": [
         { name: '兴安停车区(呼北高速呼和浩特方向)', location: '110.652170,25.648818', altitude: 219 },
@@ -1809,8 +1809,6 @@ tags: The tags that matching current service stop`;
         { name: '柳城服务区(汕昆高速昆明方向)', location: '109.075863,24.523673', altitude: 183 },
       ]
     };
-
-
     const QianDongNanServiceStops = {
       "三穗县": [
         { name: '三穗服务区(沪昆高速上海方向)', location: '108.668620,26.960713', altitude: 624 },
@@ -1837,8 +1835,8 @@ tags: The tags that matching current service stop`;
       "凯里市": [
         { name: '三棵树服务区(沪昆高速上海方向)', location: '108.054269,26.562132', altitude: 791 },
         { name: '三棵树服务区(沪昆高速昆明方向)', location: '108.055320,26.563075', altitude: 791 },
-        { name: '毛家庄服务区(凯里环城高速外环方向)', location: '107.945940,26.616421', altitude: 752 },
-        { name: '毛家庄服务区(凯里环城高速内环方向)', location: '107.947433,26.614926', altitude: 752 },
+        { name: '毛家庄服务区(A)', location: '107.949983,26.613230', altitude: 752 },
+        { name: '毛家庄服务区(B)', location: '107.951492,26.611449', altitude: 752 },
       ],
       "剑河县": [
         { name: '观么服务区(剑黎高速黎平方向)', location: '108.638320,26.697849', altitude: 701 },
@@ -1873,8 +1871,8 @@ tags: The tags that matching current service stop`;
         { name: '平永服务区(凯从高速从江方向)', location: '108.336912,26.113289', altitude: 452 },
         { name: '笔架山服务区(沿榕高速沿河方向)', location: '108.563738,26.047998', altitude: 336 },
         { name: '笔架山服务区(沿榕高速榕江方向)', location: '108.562886,26.050164', altitude: 336 },
-        { name: '忠诚停车区(凯从高速凯里方向)', location: '108.500508,26.049625', altitude: 421 },
-        { name: '忠诚停车区(凯从高速从江方向)', location: '108.503366,26.046747', altitude: 421 },
+        { name: '忠诚停车区(A)', location: '108.504580,26.046386', altitude: 421 },
+        { name: '忠诚停车区(B)', location: '108.507436,26.043740', altitude: 421 },
       ],
       "锦屏县": [
         { name: '锦屏服务区(松从高速从江方向)', location: '109.226528,26.604463', altitude: 387 },
@@ -1925,18 +1923,17 @@ tags: The tags that matching current service stop`;
         { name: '高屯服务区(剑黎高速黎平方向)', location: '109.165607,26.357483', altitude: 457 },
       ]
     };
-
-
     const GuiYangServiceStops = {
       "乌当区": [
+        {name: '东二环高速服务区', location: '106.753099,26.608787', altitude: 1086},
         { name: '羊昌停车区(银百高速银川方向)', location: '106.934502,26.844799', altitude: 1291 },
         { name: '羊昌停车区(银百高速百色方向)', location: '106.934240,26.845830', altitude: 1291 },
         { name: '柿花寨停车区(渝筑高速贵阳方向)', location: '106.913271,26.871428', altitude: 1227 },
         { name: '柿花寨停车区(渝筑高速重庆方向)', location: '106.914205,26.870669', altitude: 1227 },
       ],
       "云岩区": [
-        { name: '火石坡服务区(贵阳绕城高速外环方向)', location: '106.721290,26.679115', altitude: 1259 },
-        { name: '火石坡服务区(贵阳绕城高速内环方向)', location: '106.721384,26.676709', altitude: 1259 },
+        { name: '火石坡服务区(A)', location: '106.725079,26.675593', altitude: 1259 },
+        { name: '火石坡服务区(B)', location: '106.725178,26.673240', altitude: 1259 },
       ],
       "修文县": [
         { name: '久长服务区(兰海高速海口方向)', location: '106.698987,26.895229', altitude: 1331 },
@@ -1948,10 +1945,12 @@ tags: The tags that matching current service stop`;
         { name: '六广河服务区(江黔高速江口方向)', location: '106.416426,27.079921', altitude: 1081 },
       ],
       "南明区": [
-        { name: '龙洞堡服务区(贵阳绕城高速内环方向)', location: '106.794464,26.513206', altitude: 1098 },
-        { name: '龙洞堡服务区(贵阳绕城高速外环方向)', location: '106.795095,26.511824', altitude: 1098 },
-        { name: '永乐服务区(贵阳绕城高速外环方向)', location: '106.884546,26.594782', altitude: 1163 },
-        { name: '永乐服务区(贵阳绕城高速环内方向)', location: '106.885444,26.591480', altitude: 1163 },
+        { name: '沙地坡服务区(A)', location: '106.778883,26.501395', altitude: 1128 },
+        { name: '沙地坡服务区(B)', location: '106.777657,26.501540', altitude: 1128 },
+        { name: '龙洞堡服务区(A)', location: '106.798268,26.509690', altitude: 1098 },
+        { name: '龙洞堡服务区(B)', location: '106.798888,26.508445', altitude: 1098 },
+        { name: '永乐服务区(A)', location: '106.888155,26.591221', altitude: 1163 },
+        { name: '永乐服务区(B)', location: '106.885444,26.591480', altitude: 1163 },
       ],
       "开阳县": [
         { name: '龙岗服务区(银百高速银川方向)', location: '107.097446,26.911393', altitude: 1129 },
@@ -1978,16 +1977,20 @@ tags: The tags that matching current service stop`;
         { name: '红枫服务区(厦蓉高速成都方向)', location: '106.342323,26.528159', altitude: 1255 },
       ],
       "白云区": [
-        { name: '白云服务区(贵阳绕城高速内环方向)', location: '106.668404,26.702622', altitude: 1279 },
-        { name: '白云服务区(外环方向)', location: '106.637524,26.704541', altitude: 1279 },
+        {name: '白云服务区', location: '106.641033,26.700635', altitude: 1264},
+        {name: '白云加油站(兰海高速兰州方向)', location: '106.694532,26.712708', altitude: 1293},
+        {name: '白云加油站(兰海高速海口方向)', location: '106.693667,26.713061', altitude: 1293},
       ],
       "花溪区": [
         { name: '青岩服务区(花安高速安顺方向)', location: '106.642781,26.345260', altitude: 1151 },
         { name: '青岩服务区(花安高速花溪方向)', location: '106.642030,26.341648', altitude: 1151 },
-        { name: '花溪服务区(贵阳南环高速外环方向)', location: '106.591657,26.418803', altitude: 1194 },
-        { name: '花溪服务区(贵阳南环高速内环方向)', location: '106.592226,26.420665', altitude: 1194 },
+        {name: '花溪服务区(A)', location: '106.595218,26.415355', altitude: 1199},
+        {name: '花溪服务区(B)', location: '106.595582,26.417219', altitude: 1199},
+        {name: '孟关停车区(银百高速百色方向)', location: '106.744590,26.392173', altitude: 1103},
       ]
     };
+
+
     const BiJieServiceStops = {
       "七星关区": [
         { name: '金银山服务区(厦蓉高速厦门方向)', location: '105.404885,27.445738', altitude: 1709 },
@@ -3014,6 +3017,8 @@ tags: The tags that matching current service stop`;
         maximumAge: 60000         // 缓存有效期
       }
     );
+
+    //TODO: 下高速充电规划，总电价和时间对比
   </script>
 </body>
 

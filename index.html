@@ -758,7 +758,7 @@
         const polylines = step.polyline.split(';').splice(1);
         const incre = Math.floor(polylines.length / Math.floor(distance / 800)); // scan at every 800M 
         for (let index = 0; index < polylines.length; index += incre) {
-          const ret = await getNearestStop(polylines[index], step.cities, prevStation);
+          const ret = await getNearestStop(polylines[index], step.cities, prevStation, endStation.location);
           if (ret !== undefined && ret.name !== prevStation.name) {
             const nextStop = await getStopRecord(prevStation, ret);
             stops.push(nextStop);
@@ -867,7 +867,7 @@
       }
       return eval(arithmeticExpression).toFixed(2);
     }
-    async function getNearestStop(location, cities, prevStation) {
+    async function getNearestStop(location, cities, prevStation, destLoc) {
       for (const city of cities) {
         const stops = ServiceStops[city.city];
         if (!stops)
@@ -884,16 +884,30 @@
           }
         }
         if (found) {
-          let distance = (await getPath(prevStation.location, found.location)).distance;
+          const distanceToDest = calculateDistance(s.location, destLoc);
+          let pathInfo = await getPath(prevStation.location, found.location);
+          let distance = pathInfo.distance;
           const matchStr = found.name.split("(")[0];
+          let findAnother = false;
           for (const district in stops) {
             for (const s of stops[district]) {
               if (s.name.startsWith(matchStr)) {
+                findAnother = true;
                 let newDist = (await getPath(prevStation.location, s.location)).distance;
                 if (newDist < distance) {
                   found = s;
                   distance = newDist;
                 }
+              }
+            }
+          }
+          if (!findAnother) {
+            const maxSteps2Check = pathInfo.steps.length > 10 ? 10 : pathInfo.steps.length;
+            for (let i = 0; i<maxSteps2Check; i++) {
+              const polylines = pathInfo.steps[i].polyline.split(';');
+              if (calculateDistance(polylines[polylines.length - 1], destLoc) - distanceToDest > 1000) {
+                // wrong side of service stop, bail out
+                return;
               }
             }
           }
@@ -1453,15 +1467,6 @@ tags: The tags that matching current service stop`;
       }
       await collectService(city, pageNum + 1, allService.concat(ret));
     }
-    const GuangZhouServiceStopsInBuild = {
-      从化区: [
-        {name: '瓦窑岗服务区(京港澳高速深圳方向)(建设中)', location: '113.462168,23.612678', altitude: 41}, 
-        {name: '瓦窑岗服务区(京港澳高速北京方向)(建设中)', location: '113.463673,23.613520', altitude: 41},
-      ],
-      增城区: [
-        {name: '朱村服务区(增天高速增城方向)(建设中)', location: '113.713065,23.238229', altitude: 'x'},
-      ],
-    }
 
     const GuangZhouServiceStops = {
       '南沙区': [
@@ -1756,9 +1761,6 @@ tags: The tags that matching current service stop`;
         {name: '龙胜服务区(包茂高速茂名方向)', location: '109.946363,25.787543', altitude: 242},
       ]
     };
-
-
-
     const LiuZhouServiceStops = {
       "融水苗族自治县": [
         { name: '融水服务区(从荔高速从江方向)', location: '109.288885,25.168551', altitude: 151 },
@@ -1807,6 +1809,8 @@ tags: The tags that matching current service stop`;
         { name: '柳城服务区(汕昆高速昆明方向)', location: '109.075863,24.523673', altitude: 183 },
       ]
     };
+
+
     const QianDongNanServiceStops = {
       "三穗县": [
         { name: '三穗服务区(沪昆高速上海方向)', location: '108.668620,26.960713', altitude: 624 },
@@ -1841,6 +1845,8 @@ tags: The tags that matching current service stop`;
         { name: '观么服务区(剑黎高速剑河方向)', location: '108.638381,26.699284', altitude: 701 },
         { name: '温泉服务区(沪昆高速上海方向)', location: '108.524708,26.753915', altitude: 507 },
         { name: '温泉服务区(沪昆高速昆明方向)', location: '108.524492,26.755077', altitude: 507 },
+        { name: '南哨停车区(沿榕高速沿河方向)', location: '108.629885,26.532886', altitude: 483 },
+        { name: '南哨停车区(沿榕高速榕江方向)', location: '108.630058,26.534730', altitude: 483 },
       ],
       "台江县": [
         { name: '台江加油站(沪昆高速昆明方向)', location: '108.317602,26.658085', altitude: 659 },
@@ -1875,6 +1881,8 @@ tags: The tags that matching current service stop`;
         { name: '锦屏服务区(松从高速松桃方向)', location: '109.228176,26.604763', altitude: 387 },
         { name: '新化服务区(松从高速从江方向)', location: '109.186760,26.440013', altitude: 496 },
         { name: '新化服务区(松从高速松桃方向)', location: '109.189207,26.439610', altitude: 496 },
+        { name: '固本停车区(剑黎高速剑河方向)', location: '108.924095,26.461931', altitude: 560 },
+        { name: '固本停车区(剑黎高速黎平方向)', location: '108.922809,26.462029', altitude: 560 },
       ],
       "镇远县": [
         { name: '白杨坪服务区(沿榕高速榕江方向)', location: '108.362392,27.042259', altitude: 632 },
@@ -1885,6 +1893,10 @@ tags: The tags that matching current service stop`;
         { name: '报京停车区(沿榕高速榕江方向)', location: '108.497559,26.869176', altitude: 869 },
         { name: '镇远停车区(沪昆高速昆明方向)', location: '108.754486,27.112864', altitude: 469 },
         { name: '镇远停车区(沪昆高速上海方向)', location: '108.755226,27.112725', altitude: 469 },
+      ],
+      雷山县: [
+        { name: '开屯服务区(凯从高速从江方向)', location: '108.191610,26.259123', altitude: 893 },
+        { name: '开屯服务区(凯从高速凯里方向)', location: '108.193029,26.260164', altitude: 893 },
       ],
       "麻江县": [
         { name: '麻江服务区(沪昆高速昆明方向)', location: '107.571041,26.502989', altitude: 880 },
@@ -1913,6 +1925,8 @@ tags: The tags that matching current service stop`;
         { name: '高屯服务区(剑黎高速黎平方向)', location: '109.165607,26.357483', altitude: 457 },
       ]
     };
+
+
     const GuiYangServiceStops = {
       "乌当区": [
         { name: '羊昌停车区(银百高速银川方向)', location: '106.934502,26.844799', altitude: 1291 },
@@ -2750,6 +2764,7 @@ tags: The tags that matching current service stop`;
       "梧州市": WuZhouServiceStops,
       "桂林市": GuiLinServiceStops,
       "柳州市": LiuZhouServiceStops,
+
       "黔东南苗族侗族自治州": QianDongNanServiceStops,
       "贵阳市": GuiYangServiceStops,
       "毕节市": BiJieServiceStops,

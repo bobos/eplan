@@ -756,7 +756,7 @@
         if (!step.cost.toll_road || distance < 500)
           continue;
         const polylines = step.polyline.split(';').splice(1);
-        const incre = Math.floor(polylines.length / Math.floor(distance / 600)); // scan at every 600M 
+        const incre = Math.floor(polylines.length / Math.floor(distance / 1000)); // scan at every 1000M 
         for (let index = 0; index < polylines.length; index += incre) {
           const ret = await getNearestStop(polylines[index], step.cities, prevStation, endStation.location);
           if (ret !== undefined && ret.name !== prevStation.name) {
@@ -878,22 +878,26 @@
           if (!sa)
             continue;
           for (const s of sa) {
-            if (calculateDistance(location, s.location) <= 400) { //小于400米
+            if (calculateDistance(location, s.location) <= 500 && s.name.split('(')[0] !== prevStation.name.split('(')[0]) { //小于500米
               found = s;
             }
           }
         }
         if (found) {
-          const distanceToDest = calculateDistance(s.location, destLoc);
-          let pathInfo = await getPath(prevStation.location, found.location);
+          const processed = [found.name];
+          console.log('found', found.name);
+          const distanceToDest = calculateDistance(found.location, destLoc);
+          let pathInfo = await getPath(found.location, destLoc);
           let distance = pathInfo.distance;
           const matchStr = found.name.split("(")[0];
           let findAnother = false;
           for (const district in stops) {
             for (const s of stops[district]) {
-              if (s.name.startsWith(matchStr)) {
+              if (s.name.startsWith(matchStr) && !processed.includes(s.name)) {
+          console.log('another', s.name);
+                processed.push(s.name);
                 findAnother = true;
-                let newDist = (await getPath(prevStation.location, s.location)).distance;
+                let newDist = (await getPath(s.location, destLoc)).distance;
                 if (newDist < distance) {
                   found = s;
                   distance = newDist;
@@ -911,6 +915,7 @@
               }
             }
           }
+          console.log('choose', found.name);
           return found;
         }
       }
@@ -2960,7 +2965,6 @@ tags: The tags that matching current service stop`;
 
         inputPage.classList.remove('active');
         loadingPage.classList.add('active');
-        try {
           const aiPlan = await generateRoute(key, model, supportResponseFormat, startPoint, endPoint, startTime, startSoc, maxSoc, minSoc, conservative ? Preset.conservative : Preset.aggressive, requirements, aiEnabled);
           if (aiPlan.length > 0) {
             cacheData.aiPlan = aiPlan;
@@ -2973,9 +2977,6 @@ tags: The tags that matching current service stop`;
             console.log(aiPlan)
             renderSteps(startPoint, endPoint, aiPlan);
           }
-        } catch (err) {
-          print(err.message);
-        }
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
       });

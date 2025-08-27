@@ -605,10 +605,12 @@
           <input type="text" class="input-control" id="maxSoc" value="85">
         </div>
 
+        <!--
         <div class="input-group">
           <label class="input-label">高德地图路线选择</label>
-          <input type="text" class="input-control" id="routeNo" value="1">
+          <input type="text" class="input-control" id="routeNo" value="0">
         </div>
+        -->
 
         <div id="advanceSetting">
           <div class="switch-container">
@@ -1473,6 +1475,7 @@ tags: The tags that matching current service stop`;
       await collectService(city, pageNum + 1, allService.concat(ret));
     }
 
+    //TODO: remove A/B, gaode wei zhun
     const GuangZhouServiceStops = {
       '南沙区': [
         { name: '潭洲服务区(东新高速东沙方向)', location: '113.401198,22.759078', altitude: 8 },
@@ -1552,8 +1555,7 @@ tags: The tags that matching current service stop`;
       "三水区": [
         { name: '三水服务区(广佛肇高速广州方向)', location: '112.896063,23.244388', altitude: 15 },
         { name: '三水服务区(广佛肇高速肇庆方向)', location: '112.897686,23.245972', altitude: 15 },
-        { name: '大塘服务区(A)', location: '112.979123,23.430702', altitude: 11 },
-        { name: '大塘服务区(B)', location: '112.979980,23.429444', altitude: 11 },
+        { name: '大塘服务区', location: '112.980172,23.429447', altitude: 11 },
         { name: '范湖服务区(佛清从高速从化方向)', location: '113.027106,23.338264', altitude: 7 },
         { name: '范湖服务区(佛清从高速佛山方向)', location: '113.025242,23.338511', altitude: 7 },
       ],
@@ -2938,7 +2940,7 @@ tags: The tags that matching current service stop`;
         KwhPer80PerKm = (cltcKwhPerKm / (document.getElementById('normalFactor').value.trim() *0.1)).toFixed(4);
         Weight = document.getElementById('maxWeight').value.trim();
         chargeSpeed = document.getElementById('chargeSpeed').value.trim();
-        routeNo = document.getElementById('routeNo').value.trim();
+        //routeNo = document.getElementById('routeNo').value.trim();
 
         print(`高速百公里电耗:${KwhPer120PerKm * 100}kwh, 低速百公里电耗:${KwhPer80PerKm * 100}kwh`);
 

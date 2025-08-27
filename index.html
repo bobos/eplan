@@ -1989,26 +1989,25 @@ tags: The tags that matching current service stop`;
         {name: '孟关停车区(银百高速百色方向)', location: '106.744590,26.392173', altitude: 1103},
       ]
     };
-
-
     const BiJieServiceStops = {
       "七星关区": [
         { name: '金银山服务区(厦蓉高速厦门方向)', location: '105.404885,27.445738', altitude: 1709 },
         { name: '金银山服务区(厦蓉高速成都方向)', location: '105.406836,27.446014', altitude: 1709 },
-        { name: '汉屯服务区(毕节绕城高速外环方向)', location: '105.469224,27.346373', altitude: 1482 },
-        { name: '汉屯服务区(毕节绕城高速内环方向)', location: '105.468654,27.344979', altitude: 1482 },
+        { name: '汉屯服务区(A)', location: '105.473139,27.342823', altitude: 1482 },
+        { name: '汉屯服务区(B)', location: '105.472124,27.341808', altitude: 1482 },
         { name: '龙昌坪服务区(毕威高速毕节方向)', location: '105.130444,27.208312', altitude: 1735 },
         { name: '龙昌坪服务区(毕威高速威宁方向)', location: '105.130431,27.209408', altitude: 1735 },
         { name: '水箐服务区(毕镇高速毕节方向)', location: '105.152629,27.346813', altitude: 1839 },
         { name: '水箐服务区(毕镇高速镇雄方向)', location: '105.153567,27.347670', altitude: 1839 },
         { name: '林口停车区(厦蓉高速成都方向)', location: '105.379013,27.608091', altitude: 1366 },
         { name: '林口停车区(厦蓉高速厦门方向)', location: '105.377598,27.608132', altitude: 1366 },
-        { name: '茶亭停车区(毕节绕城高速威宁方向)', location: '105.258578,27.298348', altitude: 1538 },
-        { name: '茶亭停车区(毕节绕城高速内环方向)', location: '105.259882,27.298336', altitude: 1538 },
+        { name: '茶亭停车区(A)', location: '105.263057,27.294979', altitude: 1538 },
+        { name: '茶亭停车区(B)', location: '105.262991,27.294982', altitude: 1538 },
         { name: '朱昌停车区(杭瑞高速杭州方向)', location: '105.296217,27.158936', altitude: 1607 },
         { name: '朱昌停车区(杭瑞高速瑞丽方向)', location: '105.294920,27.159568', altitude: 1607 },
         { name: '生机停车区(厦蓉高速厦门方向)', location: '105.471387,27.763961', altitude: 885 },
-        { name: '生机停车区(厦蓉高速成都方向)', location: '105.467810,27.766033', altitude: 885 },
+        { name: '生机停车区(厦蓉高速成都方向)', location: '105.471351,27.762693', altitude: 885 },
+        { name: '窑上停车区(厦蓉高速成都方向)', location: '105.403681,27.320286', altitude: 1504 },
       ],
       "大方县": [
         { name: '响水服务区(杭瑞高速瑞丽方向)', location: '105.544512,27.223258', altitude: 1420 },
@@ -2030,9 +2029,10 @@ tags: The tags that matching current service stop`;
         { name: '后寨停车区(毕威高速威宁方向)', location: '104.397512,26.976336', altitude: 2316 },
         { name: '后寨停车区(毕威高速毕节方向)', location: '104.398338,26.975963', altitude: 2316 },
         { name: '东风停车区(都香高速香格里拉方向)', location: '104.528901,26.789321', altitude: 1823 },
-        { name: '东风停车区(都香高速都匀方向)', location: '104.525876,26.791999', altitude: 1823 },
+        { name: '东风停车区(都香高速都匀方向)', location: '104.528166,26.788482', altitude: 1823 },
         { name: '观风海停车区(都香高速香格里拉方向)', location: '103.992269,26.988683', altitude: 2257 },
-        { name: '观风海停车区(都香高速都匀方向)', location: '103.991460,26.990088', altitude: 2257 },
+        { name: '观风海停车区(都香高速都匀方向)', location: '103.993595,26.986656', altitude: 2257 },
+        { name: '制动自检区', location: '103.827940,27.131117', altitude: 2059 },
       ],
       "纳雍县": [
         { name: '九洞天服务区(杭瑞高速杭州方向)', location: '105.238996,26.991637', altitude: 1530 },
@@ -2040,7 +2040,7 @@ tags: The tags that matching current service stop`;
         { name: '乐治服务区(厦蓉高速成都方向)', location: '105.482256,26.831546', altitude: 1473 },
         { name: '乐治服务区(厦蓉高速厦门方向)', location: '105.480714,26.830220', altitude: 1473 },
         { name: '黄家屯停车区(杭瑞高速瑞丽方向)', location: '105.218841,26.780615', altitude: 1793 },
-        { name: '黄家屯停车区(杭瑞高速杭州方向)', location: '105.215167,26.781814', altitude: 1793 },
+        { name: '黄家屯停车区(杭瑞高速杭州方向)', location: '105.218227,26.778434', altitude: 1793 },
         { name: '寨乐停车区(厦蓉高速成都方向)', location: '105.318908,26.846434', altitude: 1548 },
         { name: '寨乐停车区(厦蓉高速厦门方向)', location: '105.318214,26.845718', altitude: 1548 },
       ],
@@ -2075,15 +2075,20 @@ tags: The tags that matching current service stop`;
         { name: '新化服务区(杭瑞高速瑞丽方向)', location: '106.085849,27.405088', altitude: 1484 },
         { name: '柳塘服务区(仁望高速仁怀方向)', location: '106.287726,27.371488', altitude: 1109 },
         { name: '柳塘服务区(仁望高速望谟方向)', location: '106.287049,27.370454', altitude: 1109 },
+        { name: '石场服务区', location: '105.965651,27.602295', altitude: 1040 },
       ],
       "黔西市": [
         { name: '黔西服务区(筑大高速大方方向)', location: '106.005167,26.982574', altitude: 1270 },
         { name: '黔西服务区(筑大高速贵阳方向)', location: '106.003557,26.981720', altitude: 1270 },
         { name: '西溪服务区(筑大高速大方方向)', location: '105.844131,27.085238', altitude: 1426 },
         { name: '西溪服务区(筑大高速广州方向)', location: '105.842882,27.084391', altitude: 1426 },
-        { name: '黔西服务区(仁望高速仁怀方向)', location: '105.974518,26.967245', altitude: 1274 },
-        { name: '黔西服务区(仁望高速望谟方向)', location: '105.973706,26.969714', altitude: 1274 },
+        { name: '仁望高速黔西服务区(仁望高速仁怀方向)', location: '105.974518,26.967245', altitude: 1274 },
+        { name: '仁望高速黔西服务区(仁望高速望谟方向)', location: '105.973706,26.969714', altitude: 1274 },
         { name: '六广河服务区(江黔高速黔西方向)', location: '106.398980,27.072426', altitude: 1072 },
+        { name: '甘棠停车区(江都高速江口方向)', location: '106.095464,27.060532', altitude: 1216},
+        { name: '甘棠停车区(江都高速都格方向)', location: '106.096220,27.062889', altitude: 1216},
+        { name: '官寨停车区(仁望高速望谟方向)', location: '106.258203,27.140851', altitude: 1106},
+        { name: '官寨停车区(仁望高速仁怀方向)', location: '106.259352,27.140430', altitude: 1106},
       ]
     };
     const LiuPanShuiServiceStops = {
@@ -2092,6 +2097,7 @@ tags: The tags that matching current service stop`;
         { name: '岩脚服务区(都香高速都匀方向)', location: '105.378654,26.330209', altitude: 1231 },
         { name: '大用停车区(都香高速都匀方向)', location: '105.560900,26.164457', altitude: 1316 },
         { name: '大用停车区(都香高速香格里拉方向)', location: '105.561541,26.165137', altitude: 1316 },
+        { name: '新场停车区(都香高速都匀方向)', location: '105.344862,26.355398', altitude: 1360},
       ],
       "水城区": [
         { name: '六盘水服务区(杭瑞高速瑞丽方向)', location: '104.933704,26.515238', altitude: 1843 },
@@ -2102,6 +2108,7 @@ tags: The tags that matching current service stop`;
         { name: '马家营停车区(杭瑞高速杭州方向)', location: '105.050877,26.619208', altitude: 1892 },
         { name: '陡箐停车区(都香高速都匀方向)', location: '105.138291,26.471699', altitude: 1781 },
         { name: '陡箐停车区(都香高速香格里拉方向)', location: '105.135790,26.478995', altitude: 1781 },
+        { name: '都格停车区(杭瑞高速瑞丽方向)', location: '104.749574,26.435614', altitude: 1772},
       ],
       "盘州市": [
         { name: '红果服务区(沪昆高速昆明方向)', location: '104.455745,25.736656', altitude: 1713 },
@@ -2114,8 +2121,8 @@ tags: The tags that matching current service stop`;
         { name: '保田服务区(水兴高速兴义方向)', location: '104.743974,25.400117', altitude: 1614 },
         { name: '丹霞服务区(水兴高速水城方向)', location: '104.583366,25.674783', altitude: 1689 },
         { name: '丹霞服务区(水兴高速兴义方向)', location: '104.582197,25.675086', altitude: 1689 },
-        { name: '胜境关停车区(沪昆高速昆明方向)', location: '104.321186,25.635372', altitude: 1910 },
-        { name: '胜境关停车区(沪昆高速上海方向)', location: '104.286881,25.638357', altitude: 1910 },
+        { name: '胜境关停车区(A)', location: '104.321186,25.635372', altitude: 1910 },
+        { name: '胜境关停车区(B)', location: '104.289097,25.635447', altitude: 1910 },
       ],
       "钟山区": [
         { name: '德坞服务区(都香高速香格里拉方向)', location: '104.808443,26.649197', altitude: 1986 },
@@ -2130,7 +2137,7 @@ tags: The tags that matching current service stop`;
         { name: '关岭服务区(沪昆高速昆明方向)', location: '105.565021,25.931130', altitude: 1158 },
         { name: '顶云服务区(六安高速安龙方向)', location: '105.526693,25.948410', altitude: 1302 },
         { name: '顶云服务区(六安高速六枝方向)', location: '105.528255,25.948705', altitude: 1302 },
-      ],
+      ],    
       "平坝区": [
         { name: '夏云停车区(沪昆高速昆明方向)', location: '106.309537,26.466596', altitude: 1285 },
         { name: '夏云停车区(沪昆高速上海方向)', location: '106.309848,26.465930', altitude: 1285 },
@@ -2161,24 +2168,28 @@ tags: The tags that matching current service stop`;
         { name: '宁谷停车区(花安高速花溪方向)', location: '105.983043,26.190862', altitude: 1327 },
         { name: '宁谷停车区(花安高速安顺方向)', location: '105.982684,26.192574', altitude: 1327 },
       ],
+      镇宁布依族苗族自治县: [
+        {name: '龙宫南服务区', location: '105.839067,26.040386', altitude: 1128},
+        {name: '镇宁停车区(惠兴高速惠水方向)', location: '105.908992,25.609622', altitude: 677},
+      ],
     };
     const QianXiNanServiceStops = {
       "兴义市": [
         { name: '乌沙服务区(汕昆高速汕头方向)', location: '104.755241,25.135730', altitude: 1455 },
         { name: '乌沙服务区(汕昆高速昆明方向)', location: '104.755677,25.137188', altitude: 1455 },
-        { name: '楼纳服务区(兴义绕城高速外环方向)', location: '105.011629,25.078056', altitude: 1253 },
-        { name: '楼纳服务区(兴义绕城高速内环方向)', location: '105.009457,25.078154', altitude: 1253 },
+        { name: '楼纳服务区(A)', location: '105.012270,25.075254', altitude: 1253 },
+        { name: '楼纳服务区(B)', location: '105.014443,25.075291', altitude: 1253 },
         { name: '马岭停车区(水兴高速兴义方向)', location: '104.887349,25.198010', altitude: 1117 },
         { name: '马岭停车区(水兴高速水城方向)', location: '104.887346,25.200406', altitude: 1117 },
         { name: '田坝停车区(汕昆高速汕头方向)', location: '104.707591,25.068211', altitude: 1218 },
         { name: '田坝停车区(汕昆高速昆明方向)', location: '104.713641,25.071191', altitude: 1218 },
         { name: '鲁屯停车区(汕昆高速昆明方向)', location: '105.126975,25.155292', altitude: 1363 },
         { name: '鲁屯停车区(汕昆高速汕头方向)', location: '105.126463,25.154705', altitude: 1363 },
-        { name: '万峰林停车区(兴义绕城高速外环方向)', location: '104.899524,24.957803', altitude: 1299 },
-        { name: '万峰林停车区(兴义绕城高速内环方向)', location: '104.900745,24.958486', altitude: 1299 },
-      ],
+        { name: '万峰林停车区(A)', location: '104.903299,24.955402', altitude: 1299 },
+        { name: '万峰林停车区(B)', location: '104.902164,24.954773', altitude: 1299 },
+      ],    
       "兴仁市": [
-        { name: '长耳营服务区(纳兴高速纳雍方向)', location: '105.136629,25.429653', altitude: 1382 },
+        { name: '长耳营服务区(纳兴高速纳雍方向)', location: '105.139898,25.426662', altitude: 1383},
         { name: '格沙屯停车区(纳兴高速兴义方向)', location: '105.059203,25.307846', altitude: 1474 },
         { name: '格沙屯停车区(纳兴高速纳雍方向)', location: '105.059974,25.307017', altitude: 1474 },
         { name: '巴铃停车区(惠兴高速兴仁方向)', location: '105.440819,25.466041', altitude: 1368 },
@@ -2215,12 +2226,14 @@ tags: The tags that matching current service stop`;
         { name: '边饶服务区(仁望高速仁怀方向)', location: '106.045780,25.505930', altitude: 590 },
         { name: '大观停车区(余册高速册亨方向)', location: '106.221482,25.142286', altitude: 642 },
         { name: '大观停车区(余册高速余庆方向)', location: '106.221926,25.141404', altitude: 642 },
+        { name: '望谟服务区', location: '106.062074,25.160511', altitude: 520},
       ],
       "贞丰县": [
         { name: '贞丰服务区(惠兴高速兴仁方向)', location: '105.658236,25.401698', altitude: 977 },
         { name: '贞丰服务区(惠兴高速惠水方向)', location: '105.657925,25.400399', altitude: 977 },
-        { name: '珉谷服务区(六安高速六枝方向)', location: '105.610071,25.449080', altitude: 1143 },
-        { name: '珉谷服务区(六安高速安龙方向)', location: '105.608555,25.449341', altitude: 1143 },
+        { name: '珉谷停车区(六安高速六枝方向)', location: '105.610071,25.449080', altitude: 1143 },
+        { name: '珉谷停车区(六安高速安龙方向)', location: '105.608555,25.449341', altitude: 1143 },
+        {name: '龙场加油站(惠兴高速兴仁方向)', location: '105.488885,25.458018', altitude: 1297 },
       ]
     };
     const ZunYiServiceStops = {
@@ -2232,7 +2245,7 @@ tags: The tags that matching current service stop`;
         { name: '飞鸽子服务区(江习古高速江津方向)', location: '106.549543,28.560660', altitude: 1047 },
         { name: '飞鸽子服务区(江习古高速古蔺方向)', location: '106.547395,28.560947', altitude: 1047 },
         { name: '土城停车区(蓉遵高速成都方向)', location: '105.980001,28.286460', altitude: 318 },
-        { name: '土城停车区(蓉遵高速遵义方向)', location: '105.973609,28.291289', altitude: 318 },
+        { name: '土城停车区(蓉遵高速遵义方向)', location: '105.977158,28.287810', altitude: 318 },
         { name: '良村服务区(江习古高速江津方向)', location: '106.426918,28.402322', altitude: 1054 },
         { name: '良村服务区(江习古高速古蔺方向)', location: '106.422548,28.406463', altitude: 1054 },
       ],
@@ -2254,7 +2267,7 @@ tags: The tags that matching current service stop`;
         { name: '龙家停车区(银百高速百色方向)', location: '107.534880,27.538087', altitude: 742 },
         { name: '龙家停车区(银百高速银川方向)', location: '107.536092,27.538530', altitude: 742 },
         { name: '小腮服务区(施播高速播州方向)', location: '107.798215,27.254937', altitude: 666 },
-        { name: '小腮服务区(遵余高速余庆方向)', location: '107.793031,27.257482', altitude: 666 },
+        { name: '小腮服务区(遵余高速余庆方向)', location: '107.797285,27.254184', altitude: 666 },
       ],
       "凤冈县": [
         { name: '凤冈停车区(杭瑞高速瑞丽方向)', location: '107.643219,27.884271', altitude: 811 },
@@ -2264,7 +2277,7 @@ tags: The tags that matching current service stop`;
         { name: '涪洋服务区(德习高速德江方向)', location: '107.720529,28.490299', altitude: 669 },
         { name: '涪洋服务区(德习高速习水方向)', location: '107.720720,28.491917', altitude: 669 },
         { name: '楠杆服务区(德习高速德江方向)', location: '107.880041,28.368467', altitude: 724 },
-        { name: '楠杆服务区(德习高速习水方向)', location: '107.877144,28.371349', altitude: 724 },
+        { name: '楠杆服务区(德习高速习水方向)', location: '107.881292,28.367895', altitude: 724 },
       ],
       "播州区": [
         { name: '乌江服务区(兰海高速兰州方向)', location: '106.767114,27.270323', altitude: 814 },
@@ -2278,9 +2291,9 @@ tags: The tags that matching current service stop`;
         { name: '龙山加油站(兰海高速兰州方向)', location: '106.847950,27.548650', altitude: 921 },
         { name: '龙山加油站(兰海高速海口方向)', location: '106.847107,27.547736', altitude: 921 },
         { name: '白腊坎服务区(仁望高速仁怀方向)', location: '106.574585,27.586849', altitude: 943 },
-        { name: '白腊坎服务区(仁望高速望谟方向)', location: '106.570359,27.589783', altitude: 943 },
-        { name: '乐意坝停车区(遵义绕城高速外环方向)', location: '106.711461,27.532983', altitude: 882 },
-        { name: '乐意坝停车区(遵义绕城高速内环方向)', location: '106.711345,27.535041', altitude: 882 },
+        { name: '白腊坎服务区(仁望高速望谟方向)', location: '106.573941,27.586293', altitude: 943 },
+        { name: '乐意坝停车区(A)', location: '106.715106,27.531655', altitude: 882 },
+        { name: '乐意坝停车区(B)', location: '106.715367,27.529536', altitude: 882 },
         { name: '泮水服务区(新金高速红花岗方向)', location: '106.339949,27.560106', altitude: 1004 },
         { name: '泮水服务区(新金高速金沙方向)', location: '106.338682,27.558214', altitude: 1004 },
         { name: '肇新场服务区(遵义绕城高速内环方向)', location: '106.974863,27.505563', altitude: 988 },
@@ -2300,19 +2313,20 @@ tags: The tags that matching current service stop`;
         { name: '松坎服务区(兰海高速海口方向)', location: '106.842127,28.423831', altitude: 466 },
         { name: '松坎服务区(兰海高速兰州方向)', location: '106.836236,28.494875', altitude: 466 },
         { name: '茅石停车区(渝筑高速重庆方向)', location: '106.931939,28.233091', altitude: 1092 },
-        { name: '茅石停车区(渝筑高速遵义方向)', location: '106.927014,28.236266', altitude: 1092 },
+        { name: '茅石停车区(渝筑高速遵义方向)', location: '106.930872,28.233016', altitude: 1092 },
         { name: '凉风垭停车区(兰海高速兰州方向)', location: '106.840051,28.235497', altitude: 1053 },
-        { name: '凉风垭停车区(兰海高速海口方向)', location: '106.838899,28.236158', altitude: 1053 },
+        { name: '凉风垭停车区(兰海高速海口方向)', location: '106.838896,28.236157', altitude: 1053 },
         { name: '花秋服务区(新金高速新浦方向)', location: '106.555026,28.043406', altitude: 889 },
         { name: '花秋服务区(新金高速金沙方向)', location: '106.553756,28.045205', altitude: 889 },
         { name: '水银河停车区(印习高速习水方向)', location: '106.908510,28.616893', altitude: 472 },
         { name: '水银河停车区(印习高速印江方向)', location: '106.904561,28.621723', altitude: 472 },
+        { name: '夜郎服务区', location: '106.796929,28.402438', altitude: 573 },
       ],
       "正安县": [
         { name: '正安服务区(银百高速百色方向)', location: '107.450567,28.490188', altitude: 611 },
         { name: '正安服务区(银百高速银川方向)', location: '107.451387,28.488906', altitude: 611 },
         { name: '米粮停车区(银百高速银川方向)', location: '107.438254,28.389502', altitude: 646 },
-        { name: '米粮停车区(银百高速百色方向)', location: '107.432200,28.394929', altitude: 646 },
+        { name: '米粮停车区(银百高速百色方向)', location: '107.436792,28.391846', altitude: 646 },
       ],
       "汇川区": [
         { name: '团泽服务区(渝筑高速重庆方向)', location: '107.123613,27.776019', altitude: 903 },
@@ -2339,8 +2353,8 @@ tags: The tags that matching current service stop`;
         { name: '遵义服务区(兰海高速兰州方向)', location: '106.882349,27.652419', altitude: 853 },
         { name: '金鼎山服务区(仁遵高速遵义方向)', location: '106.762491,27.732409', altitude: 944 },
         { name: '金鼎山服务区(仁遵高速仁怀方向)', location: '106.766879,27.733578', altitude: 944 },
-        { name: '海龙服务区(遵义绕城高速内环方向)', location: '106.846842,27.758561', altitude: 902 },
-        { name: '海龙服务区(遵义绕城高速外环方向)', location: '106.845079,27.758721', altitude: 902 },
+        { name: '海龙服务区(A)', location: '106.850481,27.755003', altitude: 902 },
+        { name: '海龙服务区(B)', location: '106.849396,27.755791', altitude: 902 },
       ],
       "绥阳县": [
         { name: '绥阳南服务区(新金高速金沙方向)', location: '107.235797,27.950107', altitude: 948 },
@@ -2348,7 +2362,7 @@ tags: The tags that matching current service stop`;
         { name: '蒲场服务区(渝筑高速贵阳方向)', location: '107.066302,27.902534', altitude: 886 },
         { name: '蒲场服务区(渝筑高速重庆方向)', location: '107.068091,27.903316', altitude: 886 },
         { name: '旺草服务区(务遵高速遵义方向)', location: '107.284452,28.118314', altitude: 714 },
-        { name: '旺草服务区(务遵高速务川方向)', location: '107.281776,28.121701', altitude: 714 },
+        { name: '旺草服务区(务遵高速务川方向)', location: '107.286028,28.118359', altitude: 714 },
         { name: '绥阳停车区(绥遵高速绥阳方向)', location: '107.141678,27.944354', altitude: 868 },
         { name: '绥阳停车区(绥遵高速遵义方向)', location: '107.140308,27.943430', altitude: 868 },
       ],
@@ -2356,13 +2370,15 @@ tags: The tags that matching current service stop`;
         { name: '旺隆服务区(蓉遵高速成都方向)', location: '105.877444,28.523197', altitude: 377 },
         { name: '旺隆服务区(蓉遵高速遵义方向)', location: '105.873800,28.524998', altitude: 377 },
         { name: '天台停车区(蓉遵高速遵义方向)', location: '105.766214,28.559046', altitude: 307 },
-        { name: '天台停车区(蓉遵高速成都方向)', location: '105.763291,28.563150', altitude: 307 },
+        { name: '天台停车区(蓉遵高速成都方向)', location: '105.767078,28.559642', altitude: 307 },
       ],
       "道真仡佬族苗族自治县": [
         { name: '道真服务区(银百高速银川方向)', location: '107.512847,28.858782', altitude: 851 },
         { name: '道真服务区(银百高速百色方向)', location: '107.513021,28.857318', altitude: 851 },
       ]
     };
+
+
     const QianNanServiceStops = {
       "三都水族自治县": [
         { name: '排洞停车区(厦蓉高速厦门方向)', location: '108.101048,26.025331', altitude: 640 },
@@ -2415,8 +2431,8 @@ tags: The tags that matching current service stop`;
         { name: '福泉北服务区(玉盘高速玉屏方向)', location: '107.547682,26.785198', altitude: 982 },
         { name: '福泉北服务区(玉盘高速盘州方向)', location: '107.545224,26.786566', altitude: 982 },
         { name: '瓮安南服务区(安福高速瓮安方向)', location: '107.433039,26.945466', altitude: 1211 },
-        { name: '洛邦停车区(凯里环城高速内环方向)', location: '107.714705,26.635318', altitude: 986 },
-        { name: '洛邦停车区(凯里环城高速外环方向)', location: '107.715869,26.636817', altitude: 986 },
+        {name: '洛邦停车区(A)', location: '107.719017,26.631901', altitude: 988},
+        {name: '洛邦停车区(B)', location: '107.720488,26.633500', altitude: 988},
       ],
       "罗甸县": [
         { name: '红水河停车区(银百高速银川方向)', location: '106.679001,25.201437', altitude: 451 },
@@ -2449,8 +2465,8 @@ tags: The tags that matching current service stop`;
         { name: '上堡服务区(兰海高速海口方向)', location: '107.467745,26.127380', altitude: 890 },
         { name: '都匀加油站(兰海高速兰州方向)', location: '107.505661,26.306539', altitude: 800 },
         { name: '都匀加油站(兰海高速海口方向)', location: '107.504584,26.308471', altitude: 800 },
-        { name: '羊列服务区(都匀绕城高速内环方向)', location: '107.695274,26.302642', altitude: 922 },
-        { name: '羊列服务区(都匀绕城高速外环方向)', location: '107.694923,26.304344', altitude: 922 },
+        { name: '羊列服务区(A)', location: '107.699455,26.299188', altitude: 922},
+        { name: '羊列服务区(B)', location: '107.699239,26.300921', altitude: 922},
         { name: '毛尖服务区(都香高速都匀方向)', location: '107.313172,26.167557', altitude: 1094 },
         { name: '毛尖服务区(都香高速香格里拉方向)', location: '107.309955,26.167401', altitude: 1094 },
         { name: '清水江服务区(厦蓉高速厦门方向)', location: '107.685918,26.162478', altitude: 792 },
@@ -2465,8 +2481,8 @@ tags: The tags that matching current service stop`;
         { name: '摆塘服务区(都香高速香格里拉方向)', location: '106.482850,26.080649', altitude: 1163 },
         { name: '长顺服务区(惠兴高速惠水方向)', location: '106.507086,26.027561', altitude: 1006 },
         { name: '长顺服务区(惠兴高速兴仁方向)', location: '106.505699,26.027681', altitude: 1006 },
-        { name: '广顺服务区(贵阳外环外环方向)', location: '106.401455,26.220145', altitude: 1262 },
-        { name: '广顺服务区(贵阳外环内环方向)', location: '106.404446,26.221430', altitude: 1262 },
+        { name: '广顺服务区(A)', location: '106.407966,26.218053', altitude: 1293},
+        { name: '广顺服务区(B)', location: '106.405113,26.217329', altitude: 1293},
         { name: '广顺停车区(花安高速安顺方向)', location: '106.426213,26.255951', altitude: 1286 },
         { name: '广顺停车区(花安高速花溪方向)', location: '106.427113,26.254989', altitude: 1286 },
       ],
@@ -2479,10 +2495,12 @@ tags: The tags that matching current service stop`;
         { name: '龙里停车区(厦蓉高速厦门方向)', location: '107.026040,26.426110', altitude: 1358 },
       ]
     };
+
+
     const WuZhouServiceStops = {
       万秀区: [
-        { name: '夏郢服务区(梧州绕城高速外环方向)', location: '111.299986,23.564502', altitude: 39 },
-        { name: '夏郢服务区(梧州绕城高速内环方向)', location: '111.300114,23.563003', altitude: 39 },
+        {name: '夏郢服务区(A)', location: '111.304947,23.561852', altitude: 41},
+        {name: '夏郢服务区(B)', location: '111.305393,23.560561', altitude: 41},
       ],
       岑溪市: [
         { name: '筋竹服务区(深岑高速深圳方向)', location: '111.229024,22.895104', altitude: 167 },
@@ -2535,6 +2553,20 @@ tags: The tags that matching current service stop`;
         { name: '白沙停车区(包茂高速包头方向)', location: '111.186723,23.408933', altitude: 23 },
       ]
     };
+
+英德市
+: 
+(26) ["{name: '黎溪服务区(乐广高速广州方向)', location: '113.224510,23.977485', altitude: }", "{name: '黎溪服务区(乐广高速乐昌方向)', location: '113.226579,23.976623', altitude: }", "{name: '英红服务区(乐广高速乐昌方向)', location: '113.434116,24.375336', altitude: }", "{name: '水边服务区(广连高速连州方向)', location: '113.154671,24.053643', altitude: }", "{name: '大湾服务区(广连高速连州方向)', location: '112.945165,24.315242', altitude: }", "{name: '英德停车区(乐广高速乐昌方向)', location: '113.342010,24.151141', altitude: }", "{name: '英红服务区(乐广高速广州方向)', location: '113.434156,24.378813', altitude: }", "{name: '横石水服务区(京港澳高速北京方向)', location: '113.777164,24.408257', altitude: }", "{name: '水边服务区(广连高速广州方向)', location: '113.153664,24.050320', altitude: }", "{name: '大湾服务区(广连高速广州方向)', location: '112.943823,24.313859', altitude: }", "{name: '横石水服务区(京港澳高速深圳方向)', location: '113.775598,24.408289', altitude: }", "{name: '英德停车区(乐广高速广州方向)', location: '113.341391,24.152396', altitude: }", "{name: '鱼湾服务区(京港澳高速北京方向)', location: '113.664443,24.154059', altitude: }", "{name: '石灰铺服务区(汕昆高速昆明方向)', location: '113.187223,24.225621', altitude: }", "{name: '九龙服务区(汕昆高速汕头方向)', location: '112.916729,24.105103', altitude: }", "{name: '浛洸停车区(广连高速连州方向)', location: '113.069472,24.237128', altitude: }", "{name: '石灰铺服务区(汕昆高速汕头方向)', location: '113.187905,24.224227', altitude: }", "{name: '黎溪停车区(广连高速广州方向)', location: '113.271800,23.955079', altitude: }", "{name: '浛洸停车区(广连高速广州方向)', location: '113.068586,24.236591', altitude: }", "{name: '黎溪停车区(广连高速连州方向)', location: '113.272252,23.956502', altitude: }", "{name: '鱼湾服务区(京港澳高速深圳方向)', location: '113.663221,24.153776', altitude: }", "{name: '九龙服务区(汕昆高速昆明方向)', location: '112.916574,24.106651', altitude: }", "{name: '东华服务区(汕昆高速汕头方向)', location: '113.629478,24.245852', altitude: }", "{name: '东华服务区(汕昆高速昆明方向)', location: '113.629624,24.247370', altitude: }", "{name: '望埠停车区(汕昆高速汕头方向)', location: '113.466425,24.290933', altitude: }", "{name: '望埠停车区(汕昆高速昆明方向)', location: '113.467900,24.292064', altitude: }"]
+连山壮族瑶族自治县
+: 
+(6) ["{name: '连山南服务区(二广高速广州方向)', location: '112.120388,24.278896', altitude: }", "{name: '连山南服务区(二广高速二连浩特方向)', location: '112.122422,24.278652', altitude: }", "{name: '连山东服务区(二广高速广州方向)', location: '112.238245,24.705628', altitude: }", "{name: '连山东服务区(二广高速二连浩特方向)', location: '112.239308,24.704979', altitude: }", "{name: '永丰停车区(二广高速二连浩特方向)', location: '112.087549,24.470684', altitude: }", "{name: '永丰停车区(二广高速广州方向)', location: '112.086468,24.471144', altitude: }"]
+连州市
+: 
+(12) ["{name: '大路边服务区(广连高速广州方向)', location: '112.618878,25.003777', altitude: }", "{name: '大路边服务区(广连高速连州方向)', location: '112.620678,25.002820', altitude: }", "{name: '丰阳服务区(二广高速广州方向)', location: '112.254555,25.046182', altitude: }", "{name: '丰阳服务区(二广高速二连浩特方向)', location: '112.257388,25.044558', altitude: }", "{name: '龙坪停车区(广连高速广州方向)', location: '112.582761,24.817420', altitude: }", "{name: '连州服务区(许广高速许昌方向)', location: '112.532536,24.976269', altitude: }", "{name: '龙坪停车区(广连高速连州方向)', location: '112.584235,24.815492', altitude: }", "{name: '连州服务区(许广高速广州方向)', location: '112.530898,24.977238', altitude: }", "{name: '青龙停车区(二广高速二连浩特方向)', location: '112.287603,24.815821', altitude: }", "{name: '青龙停车区(二广高速广州方向)', location: '112.286674,24.816272', altitude: }", "{name: '东芒交通驿站', location: '112.378861,24.623428', altitude: }", "{name: '东芒村交通驿站', location: '112.378675,24.623563', altitude: }"]
+阳山县
+: 
+(11) ["{name: '岭背服务区(广连高速连州方向)', location: '112.690687,24.614091', altitude: }", "{name: '阳山南服务区(许广高速许昌方向)', location: '112.698975,24.233710', altitude: }", "{name: '阳山北服务区(许广高速广州方向)', location: '112.429358,24.580061', altitude: }", "{name: '岭背服务区(广连高速广州方向)', location: '112.688327,24.615155', altitude: }", "{name: '阳山南服务区(许广高速广州方向)', location: '112.698286,24.229943', altitude: }", "{name: '阳山北服务区(许广高速许昌方向)', location: '112.430800,24.580219', altitude: }", "{name: '杨梅服务区(汕昆高速汕头方向)', location: '112.542692,24.093410', altitude: }", "{name: '杨梅服务区(汕昆高速昆明方向)', location: '112.542715,24.095134', altitude: }", "{name: '阳山县旅游驿站', location: '112.670309,24.433205', altitude: }", "{name: '清远市旅游驿站', location: '112.699981,24.589003', altitude: }", "{name: '旅游驿站', location: '112.660333,24.554475', altitude: }"]
+
     const QingYuanServiceStops = {
       佛冈县: [
         { name: '龙山服务区(广连高速连州方向)', location: '113.335848,23.787596', altitude: 27 },
@@ -2542,11 +2574,12 @@ tags: The tags that matching current service stop`;
         { name: '高岗服务区(京港澳高速北京方向)', location: '113.607880,23.980270', altitude: 120 },
         { name: '高岗服务区(京港澳高速深圳方向)', location: '113.608053,23.976508', altitude: 120 },
         { name: '佛冈服务区(京港澳高速深圳方向)', location: '113.523912,23.845370', altitude: 72 },
-        { name: '佛冈停车区(京港澳高速北京方向)', location: '113.516931,23.838493', altitude: 72 },
+        { name: '佛冈停车区(京港澳高速北京方向)', location: '113.516931,23.838493', altitude: 87 },
         { name: '汤塘服务区(汕湛高速湛江方向)', location: '113.558635,23.757488', altitude: 124 },
         { name: '汤塘服务区(汕湛高速汕头方向)', location: '113.556978,23.756364', altitude: 124 },
       ],
       清城区: [
+        { name: '源潭服务区(乐广高速乐昌方向)', location: '113.228713,23.685122', altitude: 23 },
         { name: '清城服务区(佛清从高速佛山方向)', location: '113.139223,23.641209', altitude: 21 },
         { name: '清城服务区(佛清从高速从化方向)', location: '113.140185,23.639797', altitude: 21 },
         { name: '横荷服务区(许广高速广州方向)', location: '113.041553,23.618433', altitude: 9 },
@@ -2563,6 +2596,7 @@ tags: The tags that matching current service stop`;
         { name: '回澜停车区(许广高速广州方向)', location: '112.961076,23.676481', altitude: 16 },
         { name: '龙湾停车区(汕湛高速湛江方向)', location: '112.897080,23.711515', altitude: 64 },
         { name: '龙湾停车区(汕湛高速汕头方向)', location: '112.899888,23.712415', altitude: 64 },
+        { name: '新村停车区(汕昆高速汕头方向)', location: '112.659338,24.102488', altitude: 364 },
       ],
       英德市: [
         { name: '黎溪服务区(乐广高速广州方向)', location: '113.224510,23.977485', altitude: 69 },
